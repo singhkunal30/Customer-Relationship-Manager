@@ -13,7 +13,7 @@ public interface CustomerService {
 	CustomerDTO updateCustomer(CustomerDTO customerDTO);
 	
 	boolean removeCustomer(int id);
-	
+
 	List<CustomerDTO> getAllCustomers();
 	
 }

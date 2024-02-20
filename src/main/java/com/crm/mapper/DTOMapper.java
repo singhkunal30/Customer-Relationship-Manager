@@ -10,11 +10,12 @@ import com.crm.model.Customer;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DTOMapper {
+	
 	Customer toCustomer(CustomerDTO customerDTO);
 	
 	CustomerDTO toCustomerDTO(Customer customer);
 	
 	List<CustomerDTO> toCustomerDTOs(List<Customer> customers);
-	
+
 	List<Customer> toCustomers(List<CustomerDTO> customers);
 }
