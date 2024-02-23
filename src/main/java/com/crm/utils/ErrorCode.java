@@ -12,11 +12,13 @@ import lombok.Getter;
 public class ErrorCode {
 	
 	public final long customerNotFound;
+	public final long userNotFound;
 	public final long invalidRequest;
 	
 	public ErrorCode(Environment env) {
 		this.customerNotFound=Long.valueOf(env.getProperty("error.code.customer.not.found"));
 		this.invalidRequest=Long.valueOf(env.getProperty("error.code.invalid.request"));
+		this.userNotFound=Long.valueOf(env.getProperty("error.code.user.not.found"));
 	}
 
 }

@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.RSAKey;
 
-@Configuration
+//@Configuration
 public class WebSecurityConfig {
 	
 	@Bean

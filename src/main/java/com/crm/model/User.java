@@ -11,28 +11,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Table(name="customer_info")
-public class Customer {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "user_info")
+public class User {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
 	
-	@Column(name="first_name")
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 	
-	@Column(name="last_name")
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-	@Column(name="phone_number")
-	private Long phoneNumber;
-	
-	@Column(name="email_id")
+	@Column(name = "email_id", nullable = false)
 	private String emailId;
+	
+	@Column(name = "password", nullable = false)
+	private String password;
+	
+	@Column(name = "role", nullable = false)
+	private String role;
 
 }
