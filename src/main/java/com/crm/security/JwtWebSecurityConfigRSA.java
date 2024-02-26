@@ -23,7 +23,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
 //@Configuration
-public class JwtWebSecurityConfig {
+public class JwtWebSecurityConfigRSA {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

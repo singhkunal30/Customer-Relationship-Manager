@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RestController
-public class JwtAuthenticationResource {
+public class JwtAuthenticationResourceRSA {
 	
 	private JwtEncoder jwtEncoder;
 	
-	public JwtAuthenticationResource(JwtEncoder jwtEncoder) {
+	public JwtAuthenticationResourceRSA(JwtEncoder jwtEncoder) {
 		this.jwtEncoder = jwtEncoder;
 	}
 	
