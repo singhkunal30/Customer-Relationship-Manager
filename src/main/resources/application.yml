@@ -12,3 +12,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+           google:
+            client-id: 947980249688-b86rif23d977qkugehq47n75hodqfnpd.apps.googleusercontent.com
+            client-secret: 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

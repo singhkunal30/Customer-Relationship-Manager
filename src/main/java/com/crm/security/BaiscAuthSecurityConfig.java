@@ -14,9 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.crm.service.CustomUserDetailsService;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+//@Configuration
+//@EnableWebSecurity
+public class BaiscAuthSecurityConfig {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
