@@ -18,7 +18,7 @@ public class ErrorMessage {
 	public ErrorMessage(Environment env) {
 		this.customerNotFound=env.getProperty("error.message.customer.not.found");
 		this.invalidRequest=env.getProperty("error.message.invalid.request");
-		this.userNotFound=env.getProperty("error.message.usmer.not.found");
+		this.userNotFound=env.getProperty("error.message.user.not.found");
 	}
 
 }

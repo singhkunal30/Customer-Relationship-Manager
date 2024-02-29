@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String emailId) {
 		User user = userRepository.findByEmailId(emailId)
-				.orElseThrow(() -> new CommonException(errMsg.getUserNotFound()+" "+emailId, 
+				.orElseThrow(() -> new CommonException((errMsg.getUserNotFound()+" "+emailId), 
 						errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
 		return new org.springframework.security.core.userdetails.User(user.getEmailId(), 
 				user.getPassword(), Collections.emptyList());

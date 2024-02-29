@@ -15,7 +15,7 @@ public class ControllerAdvisor {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("timestamp", ce.getTimestamp());
 		body.put("message", ce.getErrMsg());
-		body.put("error code", ce.getErrCode());
+		body.put("error_code", ce.getErrCode());
 		return new ResponseEntity<>(body, ce.getHttpStatus());
 	}
 	
@@ -24,7 +24,7 @@ public class ControllerAdvisor {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("timestamp", ce.getTimestamp());
 		body.put("message", ce.getErrMsg());
-		body.put("error code", ce.getErrCode());
+		body.put("error_code", ce.getErrCode());
 		return new ResponseEntity<>(body, ce.getHttpStatus());
 	}
 }

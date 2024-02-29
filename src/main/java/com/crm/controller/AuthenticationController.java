@@ -6,17 +6,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crm.dto.JwtToken;
 import com.crm.dto.UserDTO;
 import com.crm.service.CustomUserDetailsService;
 import com.crm.utils.JwtUtils;
 
 @RestController
 @RequestMapping("/authenticate")
+@CrossOrigin("*")
 public class AuthenticationController {
 	
 	@Autowired
@@ -29,13 +32,19 @@ public class AuthenticationController {
 	private JwtUtils jwtUtils;
 	
 	@PostMapping("/auth")
-	public ResponseEntity<String> authenticate(@RequestBody UserDTO userDTO){
+	public ResponseEntity<JwtToken> authenticate(@RequestBody UserDTO userDTO){
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(userDTO.getEmailId(), userDTO.getPassword()));
 		UserDetails user = userDetailsService.loadUserByUsername(userDTO.getEmailId());
-		if(user != null) {
-			return new ResponseEntity<String>(jwtUtils.GenerateToken(user.getUsername()), HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("Some error has occured", HttpStatus.BAD_REQUEST);		
+		JwtToken token = new JwtToken(jwtUtils.GenerateToken(user.getUsername()));
+		return new ResponseEntity<JwtToken>(token, HttpStatus.OK);	
+	}
+	
+	@PostMapping("/validate-token")
+	public ResponseEntity<Boolean> validateToken(@RequestBody JwtToken jwtToken){
+		String token = jwtToken.getToken();
+		String userName = jwtUtils.extractUsername(token);
+		UserDetails user = userDetailsService.loadUserByUsername(userName);
+		return new ResponseEntity<Boolean>(jwtUtils.validateToken(token, user), HttpStatus.OK);
 	}
 }
