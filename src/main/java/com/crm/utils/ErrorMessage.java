@@ -11,14 +11,16 @@ import lombok.Getter;
 @PropertySource("classpath:error.properties")
 public class ErrorMessage {
 	
-	public final String customerNotFound;
+	public final String contactNotFound;
 	public final String userNotFound;
 	public final String invalidRequest;
+	public final String invalidJwtToken;
 	
 	public ErrorMessage(Environment env) {
-		this.customerNotFound=env.getProperty("error.message.customer.not.found");
+		this.contactNotFound=env.getProperty("error.message.contact.not.found");
 		this.invalidRequest=env.getProperty("error.message.invalid.request");
 		this.userNotFound=env.getProperty("error.message.user.not.found");
+		this.invalidJwtToken=env.getProperty("error.message.jwt.invalid.token");
 	}
 
 }

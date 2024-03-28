@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.crm.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, Long>{
 	
-	Optional<User> findByEmailId(String emailId);
+	Optional<User> findByEmailOrUsername(String email, String username);
 }

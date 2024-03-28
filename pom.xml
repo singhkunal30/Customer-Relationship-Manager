@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.project</groupId>
-	<artifactId>customerRelationshipManager</artifactId>
+	<artifactId>customerRelationshipManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customerRelationshipManager</name>
-	<description>Customer Relationship Manager</description>
+	<name>customerRelationshipManagement</name>
+	<description>Customer Relationship Management</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

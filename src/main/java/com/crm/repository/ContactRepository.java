@@ -3,9 +3,9 @@ package com.crm.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.crm.model.Customer;
+import com.crm.model.Contact;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 
 }

@@ -14,27 +14,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class User {
-    @Id
+@Getter
+@Setter
+@Table(name = "contacts")
+public class Contact {
+    
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long contactId;
 
     @Column(nullable = false)
-    private String username;
+    private String firstName;
 
     @Column(nullable = false)
-    private String password;
+    private String lastName;
 
     @Column(nullable = false)
     private String email;
 
+    private String phone;
+
+    private String company;
+
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
-    
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
 }

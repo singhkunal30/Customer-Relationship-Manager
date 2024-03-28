@@ -1,4 +1,4 @@
-package com.crm.dto;
+package com.crm.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,12 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CustomerDTO {
+public class JwtToken {
 	
-	private int id;
-	private String firstName;
-	private String lastName;
-	private Long phoneNumber;
-	private String emailId;
+	private String token;
 
 }

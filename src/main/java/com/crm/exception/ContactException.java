@@ -8,13 +8,13 @@ import lombok.Getter;
 
 @SuppressWarnings("serial")
 @Getter
-public class CustomerException extends RuntimeException{
+public class ContactException extends RuntimeException{
 	private final LocalDateTime timestamp;
 	private final String errMsg;
 	private final Long errCode;
 	private final HttpStatus httpStatus;
 	
-	public CustomerException(String errMsg, Long errCode, HttpStatus httpStatus) {
+	public ContactException(String errMsg, Long errCode, HttpStatus httpStatus) {
 		this.timestamp = LocalDateTime.now();
 		this.errMsg = errMsg;
 		this.errCode = errCode;

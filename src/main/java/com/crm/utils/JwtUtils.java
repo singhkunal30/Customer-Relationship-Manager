@@ -6,10 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.crm.exception.CommonException;
+
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -18,11 +23,21 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
 	
+	@Autowired
+	private ErrorCode errCode;
+	
+	@Autowired
+	private ErrorMessage errMsg;
+	
 	public static final String SECRET = "357638792F423F4428472B4B6250655368566D597133743677397A2443264629";
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+    	 try {
+             final Claims claims = extractAllClaims(token);
+             return claimsResolver.apply(claims);
+         } catch (JwtException e) {
+             throw new CommonException(errMsg.getInvalidJwtToken(), errCode.getInvalidJwtToken(), HttpStatus.UNPROCESSABLE_ENTITY);
+         }
     }
 
     private Claims extractAllClaims(String token) {

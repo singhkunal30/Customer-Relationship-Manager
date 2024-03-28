@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class JwtToken {
+@NoArgsConstructor
+@AllArgsConstructor
+public class RoleDTO {
 	
-	private String token;
+    private Long roleId;
+    private String roleName;
 
 }

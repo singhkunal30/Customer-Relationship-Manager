@@ -1,5 +1,7 @@
 package com.crm.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,27 +16,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
-public class User {
+@Getter
+@Setter
+@Table(name = "tasks")
+public class Task {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long taskId;
 
     @Column(nullable = false)
-    private String username;
+    private String title;
+
+    private String description;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
-    private String email;
+    private Date deadline;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @JoinColumn(name = "assigned_to", nullable = false)
+    private User assignedTo;
+
+    @ManyToOne
+    @JoinColumn(name = "assigned_by", nullable = false)
+    private User assignedBy;
     
 }

@@ -19,8 +19,8 @@ public class ControllerAdvisor {
 		return new ResponseEntity<>(body, ce.getHttpStatus());
 	}
 	
-	@ExceptionHandler(CustomerException.class)
-	public ResponseEntity<Object> handleCustomerException(CustomerException ce, WebRequest request){
+	@ExceptionHandler(ContactException.class)
+	public ResponseEntity<Object> handleCustomerException(ContactException ce, WebRequest request){
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("timestamp", ce.getTimestamp());
 		body.put("message", ce.getErrMsg());
