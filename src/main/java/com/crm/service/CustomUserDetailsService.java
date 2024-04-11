@@ -1,8 +1,6 @@
 package com.crm.service;
 
 import java.util.Collections;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import com.crm.exception.CommonException;
+import com.crm.exception.CrmException;
 import com.crm.model.User;
 import com.crm.repository.UserRepository;
 import com.crm.utils.ErrorCode;
@@ -31,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String input) {
 		User user = userRepository.findByEmailOrUsername(input, input).orElseThrow(() -> 
-		new CommonException(errMsg.getUserNotFound(), errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
+		new CrmException(errMsg.getUserNotFound(), errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), 
 				user.getPassword(), Collections.emptyList());
 	}

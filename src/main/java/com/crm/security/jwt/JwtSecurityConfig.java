@@ -1,4 +1,4 @@
-package com.crm.security;
+package com.crm.security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

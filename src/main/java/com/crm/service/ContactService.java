@@ -6,11 +6,11 @@ import com.crm.dto.ContactDTO;
 
 public interface ContactService {
 	
-	ContactDTO createContact(ContactDTO ContactDTO);
+	ContactDTO createContact(ContactDTO contactDTO);
 	
 	ContactDTO getContact(long id);
 	
-	ContactDTO updateContact(ContactDTO ContactDTO);
+	ContactDTO updateContact(ContactDTO contactDTO);
 	
 	boolean removeContact(long id);
 

@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.crm.exception.CommonException;
+import com.crm.exception.CrmException;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -36,7 +36,7 @@ public class JwtUtils {
              final Claims claims = extractAllClaims(token);
              return claimsResolver.apply(claims);
          } catch (JwtException e) {
-             throw new CommonException(errMsg.getInvalidJwtToken(), errCode.getInvalidJwtToken(), HttpStatus.UNPROCESSABLE_ENTITY);
+             throw new CrmException(errMsg.getInvalidJwtToken(), errCode.getInvalidJwtToken(), HttpStatus.UNPROCESSABLE_ENTITY);
          }
     }
 

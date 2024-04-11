@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.crm.dto.ContactDTO;
-import com.crm.exception.ContactException;
+import com.crm.exception.CrmException;
 import com.crm.mapper.DTOMapper;
 import com.crm.model.Contact;
 import com.crm.repository.ContactRepository;
@@ -17,7 +17,7 @@ import com.crm.utils.ErrorMessage;
 public class ContactServiceImpl implements ContactService{
 	
 	@Autowired
-	ContactRepository ContactRepository;
+	ContactRepository contactRepository;
 	
 	@Autowired
 	DTOMapper mapper;
@@ -29,42 +29,42 @@ public class ContactServiceImpl implements ContactService{
 	ErrorCode errCode;
 	
 	@Override
-	public ContactDTO createContact(ContactDTO ContactDTO) {
-		Contact Contact = mapper.toContact(ContactDTO);
-		Contact savedContact = ContactRepository.save(Contact);
+	public ContactDTO createContact(ContactDTO contactDTO) {
+		Contact contact = mapper.toContact(contactDTO);
+		Contact savedContact = contactRepository.save(contact);
 		return mapper.toContactDTO(savedContact);
 	}
 
 	@Override
-	public ContactDTO getContact(long id) throws ContactException {
-		Contact Contact = ContactRepository.findById(id)
-				.orElseThrow(() -> new ContactException(errMsg.getContactNotFound() + ": " +id, errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
-		return mapper.toContactDTO(Contact);
+	public ContactDTO getContact(long id) throws CrmException {
+		Contact contact = contactRepository.findById(id)
+				.orElseThrow(() -> new CrmException(errMsg.getContactNotFound() + ": " +id, errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
+		return mapper.toContactDTO(contact);
 	}
 
 	@Override
-	public ContactDTO updateContact(ContactDTO ContactDTO) {
-		Contact Contact = ContactRepository.findById(ContactDTO.getContactId())
-				.orElseThrow(() -> new ContactException(errMsg.getContactNotFound() + " " +ContactDTO.getContactId(), 
+	public ContactDTO updateContact(ContactDTO contactDTO) {
+		Contact contact = contactRepository.findById(contactDTO.getContactId())
+				.orElseThrow(() -> new CrmException(errMsg.getContactNotFound() + " " +contactDTO.getContactId(), 
 						errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
-		Contact updatedContact = mapper.toContact(ContactDTO);
-		updatedContact.setContactId(ContactDTO.getContactId());
-		ContactRepository.save(updatedContact);
+		Contact updatedContact = mapper.toContact(contactDTO);
+		updatedContact.setContactId(contactDTO.getContactId());
+		contactRepository.save(updatedContact);
 		return mapper.toContactDTO(updatedContact);
 	}
 
 	@Override
 	public boolean removeContact(long id) {
-		Contact c = ContactRepository.findById(id)
-				.orElseThrow(() -> new ContactException(errMsg.getContactNotFound() + " " +id, errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
-		ContactRepository.delete(c);
+		Contact contact = contactRepository.findById(id)
+				.orElseThrow(() -> new CrmException(errMsg.getContactNotFound() + " " +id, errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
+		contactRepository.delete(contact);
 		return true;
 	}
 
 	@Override
 	public List<ContactDTO> getAllContacts() {
-		List<ContactDTO> ContactDTOs = mapper.toContactDTOs(ContactRepository.findAll());
-		return ContactDTOs;
+		List<ContactDTO> contactDTOs = mapper.toContactDTOs(contactRepository.findAll());
+		return contactDTOs;
 	}
 
 	

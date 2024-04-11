@@ -11,7 +11,7 @@
 	<groupId>com.project</groupId>
 	<artifactId>customerRelationshipManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customerRelationshipManagement</name>
+	<name>CustomerRelationshipManagement</name>
 	<description>Customer Relationship Management</description>
 	<properties>
 		<java.version>17</java.version>
@@ -90,6 +90,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.twilio.sdk</groupId>
+		    <artifactId>twilio</artifactId>
+		    <version>10.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

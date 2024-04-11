@@ -3,7 +3,7 @@ package com.crm.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import com.crm.exception.CommonException;
+import com.crm.exception.CrmException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -62,7 +62,7 @@ public class JsonUtils {
 			response = mapper.readValue(request.getInputStream(), typeReference);
 		} catch (Exception e) {
 			log.error("Exception at json request parsing ", e);
-			throw new CommonException(errMsg.getInvalidRequest(), errCode.getInvalidRequest(), HttpStatus.BAD_REQUEST);
+			throw new CrmException(errMsg.getInvalidRequest(), errCode.getInvalidRequest(), HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}
