@@ -22,6 +22,6 @@ spring:
             client-id: 947980249688-b86rif23d977qkugehq47n75hodqfnpd.apps.googleusercontent.com
             client-secret: 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
 twilio:
-  account_sid: ${TWILIO_ACCOUNT_SID}
-  auth_token: ${TWILIO_AUTH_TOKEN}
-  trial_number: ${TWILIO_TRIAL_NUMBER}
+  account-sid: ${TWILIO_ACCOUNT_SID}
+  auth-token: ${TWILIO_AUTH_TOKEN}
+  phone-number: ${TWILIO_PHONE_NUMBER}
