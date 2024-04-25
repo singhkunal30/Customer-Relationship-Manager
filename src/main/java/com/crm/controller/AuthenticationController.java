@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crm.security.jwt.JwtRequest;
-import com.crm.security.jwt.JwtToken;
-import com.crm.service.CustomUserDetailsService;
+import com.crm.security.JwtRequest;
+import com.crm.security.JwtToken;
+import com.crm.security.utils.CustomUserDetailsService;
 import com.crm.utils.JsonUtils;
 import com.crm.utils.JwtUtils;
 import com.fasterxml.jackson.core.type.TypeReference;

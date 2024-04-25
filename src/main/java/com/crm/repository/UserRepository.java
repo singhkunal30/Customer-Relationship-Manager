@@ -11,4 +11,8 @@ import com.crm.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	
 	Optional<User> findByEmailOrUsername(String email, String username);
+	
+	Optional<User> findByEmail(String email);
+	
+	Optional<User> findByUsername(String username);
 }

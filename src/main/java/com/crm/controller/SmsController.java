@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crm.model.SmsRequest;
 import com.crm.service.TwilioSmsSender;
 import com.crm.utils.JsonUtils;
+import com.crm.utils.SmsRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import jakarta.servlet.http.HttpServletRequest;

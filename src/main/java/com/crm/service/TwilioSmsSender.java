@@ -3,8 +3,8 @@ package com.crm.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.crm.config.TwilioConfiguration;
-import com.crm.model.SmsRequest;
+import com.crm.twilio.config.TwilioConfiguration;
+import com.crm.utils.SmsRequest;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;

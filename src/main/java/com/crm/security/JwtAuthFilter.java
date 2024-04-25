@@ -1,4 +1,4 @@
-package com.crm.security.jwt;
+package com.crm.security;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.crm.service.CustomUserDetailsService;
+import com.crm.security.utils.CustomUserDetailsService;
 import com.crm.utils.JwtUtils;
 
 import jakarta.servlet.FilterChain;

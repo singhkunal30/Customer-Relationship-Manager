@@ -1,8 +1,7 @@
-package com.crm.service;
+package com.crm.twilio.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.crm.config.TwilioConfiguration;
 import com.twilio.Twilio;
 
 import lombok.extern.slf4j.Slf4j;

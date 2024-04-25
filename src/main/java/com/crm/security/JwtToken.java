@@ -1,4 +1,4 @@
-package com.crm.security.jwt;
+package com.crm.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

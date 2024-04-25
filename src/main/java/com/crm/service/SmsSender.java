@@ -1,6 +1,6 @@
 package com.crm.service;
 
-import com.crm.model.SmsRequest;
+import com.crm.utils.SmsRequest;
 
 public interface SmsSender {
 	

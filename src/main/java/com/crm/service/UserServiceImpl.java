@@ -2,15 +2,16 @@ package com.crm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.crm.config.TwilioConfiguration;
 import com.crm.dto.UserDTO;
 import com.crm.exception.CrmException;
 import com.crm.mapper.DTOMapper;
 import com.crm.model.SubAccount;
 import com.crm.model.User;
 import com.crm.repository.UserRepository;
+import com.crm.twilio.config.TwilioConfiguration;
 import com.crm.utils.ErrorCode;
 import com.crm.utils.ErrorMessage;
 import com.twilio.Twilio;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService{
 	TwilioConfiguration twilioConfig;
 	
 	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	DTOMapper mapper;
 	
 	@Autowired
@@ -37,8 +41,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDTO register(UserDTO userDTO) {
 		try {
+			userRepository.findByEmail(userDTO.getEmail()).ifPresent(user -> 
+				new CrmException(errMsg.getUserAlreadyExist(), errCode.getUserAlreadyExist(), HttpStatus.BAD_REQUEST));
+			userRepository.findByUsername(userDTO.getUsername()).ifPresent(user -> 
+			new CrmException(errMsg.getUserAlreadyExist(), errCode.getUserAlreadyExist(), HttpStatus.BAD_REQUEST));
 			Twilio.init(twilioConfig.getAccountSid(), twilioConfig.getAuthToken());
 			Account subAccount = Account.creator().setFriendlyName(userDTO.getUsername()).create();
+			userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 			User user = mapper.toUser(userDTO);
 			user.setSubAccount(new SubAccount(subAccount.getSid(), subAccount.getAuthToken()));
 			User savedUser = userRepository.save(user);
@@ -60,6 +69,7 @@ public class UserServiceImpl implements UserService{
 		User user = userRepository.findById(userDTO.getUserId())
 				.orElseThrow(() -> new CrmException(errMsg.getUserNotFound() + " " +userDTO.getUserId(), 
 						errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
+		userDTO.setPassword(user.getPassword());
 		User updatedUser = mapper.toUser(userDTO);
 		updatedUser.setUserId(userDTO.getUserId());
 		userRepository.save(updatedUser);

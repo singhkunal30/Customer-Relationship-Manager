@@ -15,12 +15,14 @@ public class ErrorMessage {
 	public final String userNotFound;
 	public final String invalidRequest;
 	public final String invalidJwtToken;
+	public final String userAlreadyExist;
 	
 	public ErrorMessage(Environment env) {
 		this.contactNotFound=env.getProperty("error.message.contact.not.found");
 		this.invalidRequest=env.getProperty("error.message.invalid.request");
 		this.userNotFound=env.getProperty("error.message.user.not.found");
 		this.invalidJwtToken=env.getProperty("error.message.jwt.invalid.token");
+		this.userAlreadyExist=env.getProperty("error.message.user.already.exist");
 	}
 
 }

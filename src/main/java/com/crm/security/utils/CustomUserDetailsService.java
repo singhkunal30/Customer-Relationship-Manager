@@ -1,6 +1,4 @@
-package com.crm.service;
-
-import java.util.Collections;
+package com.crm.security.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +28,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String input) {
 		User user = userRepository.findByEmailOrUsername(input, input).orElseThrow(() -> 
 		new CrmException(errMsg.getUserNotFound(), errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), 
-				user.getPassword(), Collections.emptyList());
+		return new CustomUserDetails(user);
 	}
 }
