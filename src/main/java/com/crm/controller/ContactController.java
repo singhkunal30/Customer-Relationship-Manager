@@ -27,34 +27,34 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ContactController {
 	
 	@Autowired
-	ContactService ContactService;
+	ContactService contactService;
 	
 	@PostMapping("/add")	
-	public ResponseEntity<ContactDTO> createContact(HttpServletRequest request) {
-		ContactDTO ContactDTO = JsonUtils.bindRequestToObject(request, new TypeReference<ContactDTO>() {});
-		return new ResponseEntity<>(ContactService.createContact(ContactDTO), HttpStatus.CREATED);
+	public ResponseEntity<List<ContactDTO>> createContact(HttpServletRequest request) {
+		List<ContactDTO> contactDTOs = JsonUtils.bindRequestToObject(request, new TypeReference<List<ContactDTO>>() {});
+		return new ResponseEntity<>(contactService.createContact(contactDTOs), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ContactDTO> getContact(@PathVariable int id) {
-		return new ResponseEntity<>(ContactService.getContact(id), HttpStatus.OK);
+		return new ResponseEntity<>(contactService.getContact(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/update")
 	public ResponseEntity<ContactDTO> updateContact(HttpServletRequest request) {
-		ContactDTO ContactDTO = JsonUtils.bindRequestToObject(request, new TypeReference<ContactDTO>() {});
-		return new ResponseEntity<>(ContactService.updateContact(ContactDTO), HttpStatus.CREATED);
+		ContactDTO contactDTO = JsonUtils.bindRequestToObject(request, new TypeReference<ContactDTO>() {});
+		return new ResponseEntity<>(contactService.updateContact(contactDTO), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Boolean> removeContact(@PathVariable int id) {
-		return new ResponseEntity<>(ContactService.removeContact(id), HttpStatus.OK);
+		return new ResponseEntity<>(contactService.removeContact(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<ContactDTO>> getAllContacts(){
-		return new ResponseEntity<>(ContactService.getAllContacts(), HttpStatus.OK);
+		return new ResponseEntity<>(contactService.getAllContacts(), HttpStatus.OK);
 	}
 
 }

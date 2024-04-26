@@ -6,7 +6,7 @@ import com.crm.dto.ContactDTO;
 
 public interface ContactService {
 	
-	ContactDTO createContact(ContactDTO contactDTO);
+	List<ContactDTO> createContact(List<ContactDTO> contactDTOs);
 	
 	ContactDTO getContact(long id);
 	

@@ -29,10 +29,8 @@ public class ContactServiceImpl implements ContactService{
 	ErrorCode errCode;
 	
 	@Override
-	public ContactDTO createContact(ContactDTO contactDTO) {
-		Contact contact = mapper.toContact(contactDTO);
-		Contact savedContact = contactRepository.save(contact);
-		return mapper.toContactDTO(savedContact);
+	public List<ContactDTO> createContact(List<ContactDTO> contactDTOs) {
+		return mapper.toContactDTOs(contactRepository.saveAll(mapper.toContacts(contactDTOs)));
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public ContactDTO updateContact(ContactDTO contactDTO) {
-		Contact contact = contactRepository.findById(contactDTO.getContactId())
+		contactRepository.findById(contactDTO.getContactId())
 				.orElseThrow(() -> new CrmException(errMsg.getContactNotFound() + " " +contactDTO.getContactId(), 
 						errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
 		Contact updatedContact = mapper.toContact(contactDTO);
@@ -66,6 +64,8 @@ public class ContactServiceImpl implements ContactService{
 		List<ContactDTO> contactDTOs = mapper.toContactDTOs(contactRepository.findAll());
 		return contactDTOs;
 	}
+
+	
 
 	
 }
