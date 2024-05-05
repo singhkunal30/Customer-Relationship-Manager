@@ -56,7 +56,7 @@ public class ContactServiceImpl implements ContactService{
 		Contact contact = contactRepository.findById(id)
 				.orElseThrow(() -> new CrmException(errMsg.getContactNotFound() + " " +id, errCode.getContactNotFound(), HttpStatus.NOT_FOUND));
 		contactRepository.delete(contact);
-		return true;
+		return contactRepository.findById(id).isEmpty();
 	}
 
 	@Override

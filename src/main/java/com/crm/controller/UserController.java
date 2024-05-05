@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,14 +39,14 @@ public class UserController {
 		return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<UserDTO> updateContact(HttpServletRequest request) {
 		UserDTO userDTO = JsonUtils.bindRequestToObject(request, new TypeReference<UserDTO>() {});
 		return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/remove/{id}")
-	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Boolean> removeUser(@PathVariable int id) {
 		return new ResponseEntity<>(userService.removeUser(id), HttpStatus.OK);
 	}

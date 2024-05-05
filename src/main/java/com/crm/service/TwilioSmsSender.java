@@ -1,5 +1,7 @@
 package com.crm.service;
 
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,10 @@ public class TwilioSmsSender implements SmsSender{
 		creator.create();
 		log.info("Message sent");
 	}
-
-}
+	
+	@Override
+	public void sendSmsToList(HashSet<SmsRequest> smsRequests) {
+		smsRequests.forEach((request)-> sendSms(request));
+		log.info("Message sent to the List");
+	}
+}	

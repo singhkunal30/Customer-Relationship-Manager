@@ -11,11 +11,8 @@ import com.crm.mapper.DTOMapper;
 import com.crm.model.SubAccount;
 import com.crm.model.User;
 import com.crm.repository.UserRepository;
-import com.crm.twilio.config.TwilioConfiguration;
 import com.crm.utils.ErrorCode;
 import com.crm.utils.ErrorMessage;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.Account;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -24,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	UserRepository userRepository;
 	
 	@Autowired
-	TwilioConfiguration twilioConfig;
+	SubAccountService subAccountService;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -45,14 +42,18 @@ public class UserServiceImpl implements UserService{
 				new CrmException(errMsg.getUserAlreadyExist(), errCode.getUserAlreadyExist(), HttpStatus.BAD_REQUEST));
 			userRepository.findByUsername(userDTO.getUsername()).ifPresent(user -> 
 			new CrmException(errMsg.getUserAlreadyExist(), errCode.getUserAlreadyExist(), HttpStatus.BAD_REQUEST));
-			Twilio.init(twilioConfig.getAccountSid(), twilioConfig.getAuthToken());
-			Account subAccount = Account.creator().setFriendlyName(userDTO.getUsername()).create();
+	
 			userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 			User user = mapper.toUser(userDTO);
-			user.setSubAccount(new SubAccount(subAccount.getSid(), subAccount.getAuthToken()));
+			SubAccount subAccount = subAccountService.createSubAccount(userDTO.getUsername());
+			user.setSubAccount(subAccount);
 			User savedUser = userRepository.save(user);
+			
 			return mapper.toUserDTO(savedUser);
-		}catch (Exception e) {
+		}catch (CrmException ce) {
+			throw ce;
+		}
+		catch (Exception e) {
 			throw new CrmException(e.getMessage(), errCode.getInvalidRequest() , HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -82,6 +83,6 @@ public class UserServiceImpl implements UserService{
 				.orElseThrow(() -> new CrmException(errMsg.getUserNotFound()+ " " +id, 
 						errCode.getUserNotFound(), HttpStatus.NOT_FOUND));
 		userRepository.delete(user);
-		return true;
+		return userRepository.findById(id).isEmpty();
 	}
 }
